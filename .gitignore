@@ -1,0 +1,30 @@
+# Laravel storage folder
+/storage/*
+
+# Laravel environment file
+.env
+
+# Laravel public asset directories
+/public/storage
+/public/hot
+/public/vendor
+
+# NPM dependencies
+/node_modules/
+
+# Laravel Mix
+/node_modules/
+/public/mix-manifest.json
+/public/css/
+/public/js/
+/public/hot/
+
+# PHPUnit testing framework
+/phpunit.xml
+
+# Composer dependency management
+/vendor/
+
+# IDE files
+.idea/
+.vscode/
