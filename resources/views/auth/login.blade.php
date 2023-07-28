@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="{{ url('/assets_login/images/undraw_remotely_2j6y.svg') }}"
+                    <img src="{{ url('/assets_login/images/bg_2.png') }}"
                         alt="Image" class="img-fluid">
                 </div>
                 <div class="col-md-6 contents">
@@ -33,7 +33,7 @@
                         <div class="col-md-8">
                             <div class="mb-4">
                                 <h3>Sign In</h3>
-                                <p class="mb-4">Aplikasi Buku Induk Siswa <br>SMA Negeri 19 Surabaya</p>
+                                <p class="mb-4">Aplikasi Buku Tamu Digital</p>
                             </div>
                             @foreach($errors->all() as $error)
                                 <div class="alert alert-danger fade show">

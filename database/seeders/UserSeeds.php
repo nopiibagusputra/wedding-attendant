@@ -30,17 +30,6 @@ class UserSeeds extends Seeder
             'verificationcode' => Str::random(20),
         ]);
 
-         //buat user sekolah
-         User::create([
-             'name'  => 'sekolah',
-             'level' => 'sekolah',
-             'active'=> '1',
-             'email' => 'sekolah@sekolah.com',
-             'email_verified_at' => now(),
-             'password' => bcrypt('sekolah'),
-             'remember_token' => Str::random(60),
-             'verificationcode' => Str::random(20),
-         ]);
         Schema::enableForeignKeyConstraints();
     }
 }

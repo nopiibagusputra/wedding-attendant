@@ -62,9 +62,27 @@
                             </li>
                         </ul>
                     </li>
+                    <li
+                        class="{{ (request()->is('admin/guest*')) ? 'mm-active' : '' }}">
+                        <a href="#"
+                            {{ (request()->is('admin/guest*')) ? 'aria-expanded="true"' : 'aria-expanded="false"' }}>
+                            <i class="metismenu-icon pe-7s-users"></i>
+                            Manajemen Tamu
+                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        </a>
+                        <ul
+                            {{ (request()->is('admin/guest/list')) ? 'mm-show' : '' }}>
+                            <li>
+                                <a href="{{route('guestShow')}}">
+                                    <i class="metismenu-icon"></i>
+                                    Daftar Tamu
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
 
-                @if(Auth::user()->level == 'sekolah')
+                {{-- @if(Auth::user()->level == 'sekolah')
                     <li class="app-sidebar__heading">Beranda</li>
                     <li>
                         <a href="{{ route('dashboard_sekolah') }}"
@@ -73,7 +91,7 @@
                             Beranda
                         </a>
                     </li>
-                @endif
+                @endif --}}
             </ul>
 
         </div>

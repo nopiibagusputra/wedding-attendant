@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\GuestModel;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\GuestImport;
+use DNS1D;
 
 
 class ManagementController extends Controller
@@ -98,6 +102,81 @@ class ManagementController extends Controller
         return redirect('/admin/users/list')->with([
             'success' => 'Pengguna Berhasil Dihapus!'
         ]);
+    }
+
+    public function guestShow(){
+        $guest = GuestModel::all();
+        return view('admin.guest.list_guest', [
+            'data' => $guest
+        ]);
+    }
+
+    public function guestStore(Request $request){
+        $this->validate($request, [
+            'nama'  => 'required|max:255',
+            'alamat' => 'required',
+        ]);
+
+        GuestModel::create([
+            'nama'  => $request->nama,
+            'kode_guest' => mt_rand(10000000, 99999999),
+            'alamat' => $request->alamat,
+            'status'=> 0,
+        ]);
+
+        $request->session()->flash('info', 'Tamu Berhasil Ditambahkan!');
+        return redirect('/admin/guest/list');
+    }
+
+    public function guestUpdate($id, Request $request){
+        $this->validate($request, [
+            'nama_edit'  => 'required',
+            'alamat_edit' => 'required',
+        ]);
+
+        $data           = GuestModel::find($id);
+        $data->nama     = $request->nama_edit;
+        $data->alamat    = $request->alamat_edit;
+        $data->save();
+
+        $request->session()->flash('info', 'Tamu Berhasil Diubah!');
+        return redirect('/admin/guest/list');
+    }
+
+    public function guestDelete($id){
+        $guest = GuestModel::find($id);
+        $guest->delete();
+
+        return redirect('/admin/guest/list')->with([
+            'success' => 'Tamu '.$guest->nama.' Berhasil Dihapus!'
+        ]);
+    }
+
+    public function guestImport(Request $request){
+        $request->validate([
+            'file' => 'required|mimes:xlsx'
+        ]);
+
+        $file = $request->file('file');
+
+        try {
+            Excel::import(new GuestImport, $file);
+
+            $request->session()->flash('info', 'Tamu Berhasil Ditambahkan!');
+            return redirect('/admin/guest/list');
+        } catch (\Exception $e) {
+            $request->session()->flash('danger', 'Gagal Import'. $e->getMessage());
+            return redirect('/admin/guest/list');
+        }
+    }
+
+    public function guestPrint(){
+        $data = GuestModel::all();
+        
+        return view('admin.guest.print_guest', [
+            'data' => $data
+        ]);
+
     }
 
 }

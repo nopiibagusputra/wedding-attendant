@@ -30,12 +30,19 @@ Route::middleware('auth', 'validatelevels:admin')->group(function () {
     Route::get('/admin/users/list', [Admin\ManagementController::class, 'show'])->name('list_users');
     Route::get('/admin/users/edit/{id}', [Admin\ManagementController::class, 'edit'])->name('edit_users');
     Route::get('/admin/users/hapus/{id}', [Admin\ManagementController::class, 'delete'])->name('hapus_users');
-    
+    Route::get('/admin/guest/list', [Admin\ManagementController::class, 'guestShow'])->name('guestShow');
+    Route::get('/admin/guest/print', [Admin\ManagementController::class, 'guestPrint'])->name('guestPrint');
+    Route::get('/admin/guest/hapus/{id}', [Admin\ManagementController::class, 'guestDelete'])->name('guestDelete');
+
     //post method
     Route::post('/admin/users/store', [Admin\ManagementController::class, 'store'])->name('store_users');
+    Route::post('/admin/guest/store', [Admin\ManagementController::class, 'guestStore'])->name('guestStore');
+    Route::post('/admin/guest/import', [Admin\ManagementController::class, 'guestImport'])->name('guestImport');
 
     //put method
     Route::put('/admin/users/update/{id}', [Admin\ManagementController::class, 'update'])->name('update_users');
+    Route::put('/admin/guest/update/{id}', [Admin\ManagementController::class, 'guestUpdate'])->name('guestUpdate');
+
 
 });
 
