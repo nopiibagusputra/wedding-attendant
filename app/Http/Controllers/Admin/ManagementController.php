@@ -179,4 +179,13 @@ class ManagementController extends Controller
 
     }
 
+    public function guestPrints(){
+        $data = GuestModel::all();
+        
+        return view('admin.guest.print2_guest', [
+            'data' => $data
+        ]);
+
+    }
+
 }

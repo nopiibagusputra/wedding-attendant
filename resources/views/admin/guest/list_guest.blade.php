@@ -33,6 +33,12 @@
                     </span>
                     Cetak Barcode
                 </a>
+                <a href="{{route('guestPrints')}}" class="btn-shadow btn btn-primary">
+                    <span class="btn-icon-wrapper pr-2 opacity-7">
+                        <i class="fa fa-user-plus fa-w-20"></i>
+                    </span>
+                    Cetak Nama
+                </a>
             </div>
         </div>
     </div>
@@ -68,7 +74,6 @@
                     <tbody>
                         <?php $i=1; ?>
                         @foreach($data as $data)
-                        @php $iData = encrypt($data->id_guest); @endphp
                             <tr>
                                 <th scope="row">{{ $i++ }}</th>
                                 {{-- <td>{{ $data->kode_guest }}</td> --}}
